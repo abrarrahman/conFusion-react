@@ -26,10 +26,10 @@ const Menu = ({dishes}) => {
             <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
             <BreadcrumbItem active>Menu</BreadcrumbItem>
           </Breadcrumb>
-        </div>
-        <div className="row">
-          <h3>Menu</h3>
-          <hr/>
+          <div className="col-12">
+            <h3>Menu</h3>
+            <hr/>
+          </div>
         </div>
         <div className="row">
           {menu}

@@ -1,17 +1,28 @@
 import React from 'react';
 import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
+import Loading from '../Loading/Loading';
 
-const RenderCard = ({item}) => {
-  return(
-    <Card>
-      <CardImg src={item.image} alt={item.name}/>
-      <CardBody>
-        <CardTitle><h4>{item.name}</h4></CardTitle>
-        {item.designation ? <CardSubtitle><h5>{item.designation}</h5></CardSubtitle> : null}
-        <CardText>{item.description}</CardText>
-      </CardBody>
-    </Card>
-  )
+const RenderCard = ({item, isLoading, errorMessage}) => {
+  if(isLoading){
+    return(
+      <Loading/>
+    );
+  }else if(errorMessage){
+    return(
+      <h4>{errorMessage}</h4>
+    );
+  }else{
+    return(
+      <Card>
+        <CardImg src={item.image} alt={item.name}/>
+        <CardBody>
+          <CardTitle><h4>{item.name}</h4></CardTitle>
+          {item.designation ? <CardSubtitle><h5>{item.designation}</h5></CardSubtitle> : null}
+          <CardText>{item.description}</CardText>
+        </CardBody>
+      </Card>
+    )
+  }
 }
 
 const Home = props => {
@@ -19,7 +30,9 @@ const Home = props => {
     <div className="container">
       <div className="row align-items-start">
         <div className='col-12 col-md m-1'>
-          <RenderCard item={props.dish}/>
+          <RenderCard item={props.dish} 
+          isLoading={props.dishesLoading} 
+          errorMessage={props.dishesErrorMessage}/>
         </div>
         <div className='col-12 col-md m-1'>
           <RenderCard item={props.promotion}/>

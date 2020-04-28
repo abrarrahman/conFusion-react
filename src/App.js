@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import {createStore} from 'redux';
-import {Reducer} from './redux/reducer';
 import Main from './components/Main/Main';
 import './App.css';
 import {BrowserRouter} from 'react-router-dom';
+import { ConfigureStore } from './redux/configureStore';
 import {Provider} from 'react-redux';
 
-const store = createStore(Reducer);
+const store = ConfigureStore();
 
 class App extends Component {
   render(){

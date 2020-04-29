@@ -16,7 +16,7 @@ const RenderDish = ({dish}) => dish?
     </CardBody>
   </Card> : null
 
-const renderComments = (comments,addComment,dishId) => {
+const renderComments = (comments,postComment,dishId) => {
     const commentDetails = comments.map(comment=><li key={comment.id}>
       <p>{comment.comment}</p>
       <p>{'--'+comment.author+', '+
@@ -30,7 +30,7 @@ const renderComments = (comments,addComment,dishId) => {
         <ul className='list-unstyled'>
         {commentDetails}
         </ul>
-        <CommentForm addComment={addComment} dishId={dishId}/>
+        <CommentForm postComment={postComment} dishId={dishId}/>
     </div> : <div></div>;
 }
 
@@ -51,7 +51,7 @@ class CommentForm extends Component {
   }
   handleSubmit(values){
     this.toggleModal();
-    this.props.addComment(this.props.dishId,values.rating,values.author,values.message);
+    this.props.postComment(this.props.dishId,values.rating,values.author,values.message);
   }
   render(){
     return(
@@ -143,7 +143,7 @@ const DishDetail = props => {
             <RenderDish dish={props.dish}/>
           </div>
           <div className="col-12 col-md-5 m-1">
-            {props.dish && renderComments(props.comments,props.addComment,props.dish.id)}
+            {props.dish && renderComments(props.comments,props.postComment,props.dish.id)}
           </div>
         </div>
       </div>

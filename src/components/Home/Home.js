@@ -33,12 +33,12 @@ const Home = props => {
         <div className='col-12 col-md m-1'>
           <RenderCard item={props.dish} 
             isLoading={props.dishesLoading} 
-            errorMessage={props.dishesErrorMessage}/>
+            errorMessage={props.dishesErrMess}/>
         </div>
         <div className='col-12 col-md m-1'>
           <RenderCard item={props.promotion}
             isLoading={props.promosLoading} 
-            errorMessage={props.promosErrorMessage}/>
+            errorMessage={props.promosErrMess}/>
         </div>
         <div className='col-12 col-md m-1'>
           <RenderCard item={props.leader}/>

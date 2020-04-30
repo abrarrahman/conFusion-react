@@ -6,29 +6,42 @@ import {LocalForm, Control, Errors} from 'react-redux-form';
 import Loading from '../Loading/Loading'
 import {Link} from 'react-router-dom';
 import {baseUrl} from '../../shared/baseUrl';
+import {FadeTransform, Fade, Stagger} from 'react-animation-components';
 
 const RenderDish = ({dish}) => dish?
-  <Card>
-    <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name}/>
-    <CardBody>
-      <CardTitle>{dish.name}</CardTitle>
-      <CardText>{dish.description}</CardText>
-    </CardBody>
-  </Card> : null
+  <FadeTransform in
+    transformProps={{
+      exitTransform: 'scale(0.5) translateY(-50%)'
+    }}>
+    <Card>
+      <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
+      <CardBody>
+        <CardTitle>{dish.name}</CardTitle>
+        <CardText>{dish.description}</CardText>
+      </CardBody>
+    </Card>
+  </FadeTransform>
+  : null
 
 const renderComments = (comments,postComment,dishId) => {
-    const commentDetails = comments.map(comment=><li key={comment.id}>
-      <p>{comment.comment}</p>
-      <p>{'--'+comment.author+', '+
-        new Intl.DateTimeFormat(
-          'en-US', 
-          {year: 'numeric', month: 'short', day:'2-digit'}
-        ).format(new Date(Date.parse(comment.date)))}</p>
-    </li>);
+    const commentDetails = comments.map(comment=>(
+      <Fade in>
+        <li key={comment.id}>
+          <p>{comment.comment}</p>
+          <p>{'--'+comment.author+', '+
+            new Intl.DateTimeFormat(
+              'en-US', 
+              {year: 'numeric', month: 'short', day:'2-digit'}
+            ).format(new Date(Date.parse(comment.date)))}</p>
+        </li>
+      </Fade>
+    ));
     return comments? <div>
         <h4>Comments</h4>
         <ul className='list-unstyled'>
-        {commentDetails}
+          <Stagger in>
+            {commentDetails}
+          </Stagger>
         </ul>
         <CommentForm postComment={postComment} dishId={dishId}/>
     </div> : <div></div>;
